@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Director's Cut — Cine Tiza</title>
+
+    <link rel="stylesheet" href="juegoStyle.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
+</head>
+
+<body>
+
+
+    <!-- ================= Navbar Cinematográfica ================= -->
+    <header class="cinema-navbar" id="mainHeader">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand" aria-label="Cine Tiza Inicio">
+                <img src="images/Logo_CineTiza.png" alt="Logo Festival Cine Tiza" class="navbar-logo">
+                <div class="navbar-brand-text">
+                    <span class="brand-title">CINE TIZA</span>
+                    <span class="brand-subtitle">18ª EDICIÓN · 2026</span>
+                </div>
+            </a>
+
+            <nav class="navbar-links" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link active">Inicio</a>
+                <a href="#about" class="nav-link">El Festival</a>
+                <a href="cortos.html" class="nav-link">Cortometrajes</a>
+                <a href="agenda.html" class="nav-link">Agenda</a>
+                <a href="ediciones.html" class="nav-link">Ediciones</a>
+                <a href="bases.html" class="nav-link">Bases</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+                </a>
+            </nav>
+
+            <div class="navbar-cta">
+                <a href="inscripciones.html" class="btn btn-primary btn-sm">Inscribí tu Corto</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">☰</button>
+            </div>
+        </div>
+    </header>
+
+
+    <main id="game">
+
+        <!-- INTRO -->
+        <section id="intro" class="screen active">
+
+            <div class="film-noise"></div>
+
+            <div class="rec">
+                <span></span> REC
+            </div>
+
+            <p class="eyebrow">CINE TIZA PRESENTA</p>
+
+            <h1>DIRECTOR'S<br><span>CUT</span></h1>
+
+            <p class="tagline">
+                Tu película. Tus decisiones.
+            </p>
+
+            <button id="startBtn" class="primary-btn">
+                ▶ COMENZAR
+            </button>
+
+            <button id="howBtn" class="secondary-btn">
+                ¿CÓMO SE JUEGA?
+            </button>
+
+        </section>
+
+
+        <!-- CREACIÓN -->
+        <section id="creation" class="screen">
+
+            <div class="progress">
+                <div id="progressBar"></div>
+            </div>
+
+            <div class="step">
+
+                <p class="step-number">01 / 04</p>
+
+                <h2>¿QUÉ HISTORIA VAS A CONTAR?</h2>
+
+                <p class="description">
+                    Elegí el género de tu próxima película.
+                </p>
+
+                <div id="genreContainer" class="choices"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TÍTULO -->
+        <section id="titleScreen" class="screen">
+
+            <div class="step">
+
+                <p class="step-number">02 / 04</p>
+
+                <h2>¿CÓMO SE LLAMA TU PELÍCULA?</h2>
+
+                <input id="filmTitle" type="text" maxlength="40" placeholder="Escribí el título...">
+
+                <button id="randomTitleBtn" class="secondary-btn">
+                    🎲 GENERAR TÍTULO
+                </button>
+
+                <button id="titleNextBtn" class="primary-btn">
+                    CONTINUAR →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERSONAJE -->
+        <section id="characterScreen" class="screen">
+
+            <div class="step">
+
+                <p class="step-number">03 / 04</p>
+
+                <h2>¿QUIÉN PROTAGONIZA TU HISTORIA?</h2>
+
+                <div id="characterContainer" class="choices"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOCACIÓN -->
+        <section id="locationScreen" class="screen">
+
+            <div class="step">
+
+                <p class="step-number">04 / 04</p>
+
+                <h2>¿DÓNDE SE GRABA?</h2>
+
+                <div id="locationContainer" class="choices"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RODAJE -->
+        <section id="shooting" class="screen">
+
+            <div class="shooting-layout">
+
+                <div class="scene-content">
+
+                    <div class="camera-info">
+                        <span>● REC</span>
+                        <span id="sceneNumber">SCENE 01</span>
+                    </div>
+
+                    <p class="eyebrow" id="eventCategory">
+                        RODAJE
+                    </p>
+
+                    <h2 id="eventTitle">
+                        Preparando escena...
+                    </h2>
+
+                    <p id="eventDescription"></p>
+
+                    <div id="eventChoices" class="event-choices"></div>
+
+                </div>
+
+
+                <aside class="stats">
+
+                    <h3>PRODUCCIÓN</h3>
+
+                    <div class="stat">
+                        <div>
+                            <span>🎬 Dirección</span>
+                            <strong id="directionStat">50</strong>
+                        </div>
+                        <div class="bar">
+                            <div id="directionBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div>
+                            <span>🎭 Actuación</span>
+                            <strong id="actingStat">50</strong>
+                        </div>
+                        <div class="bar">
+                            <div id="actingBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div>
+                            <span>📷 Fotografía</span>
+                            <strong id="cinematographyStat">50</strong>
+                        </div>
+                        <div class="bar">
+                            <div id="cinematographyBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div>
+                            <span>🎙️ Sonido</span>
+                            <strong id="soundStat">50</strong>
+                        </div>
+                        <div class="bar">
+                            <div id="soundBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div>
+                            <span>📖 Historia</span>
+                            <strong id="storyStat">50</strong>
+                        </div>
+                        <div class="bar">
+                            <div id="storyBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div>
+                            <span>✨ Creatividad</span>
+                            <strong id="creativityStat">50</strong>
+                        </div>
+                        <div class="bar">
+                            <div id="creativityBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="resources">
+                        🔋 Recursos
+                        <strong id="resourcesStat">100</strong>
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTADO -->
+        <section id="result" class="screen">
+
+            <div class="poster">
+
+                <div class="poster-noise"></div>
+
+                <p class="poster-small">
+                    CINE TIZA PRESENTA
+                </p>
+
+                <h2 id="posterTitle">
+                    MI PELÍCULA
+                </h2>
+
+                <div class="poster-score">
+                    <span id="finalScore">0</span>
+                    <small>/100</small>
+                </div>
+
+                <p id="finalCategory"></p>
+
+                <p class="poster-director">
+                    UNA PELÍCULA DE<br>
+                    <strong id="posterDirector">DIRECTOR</strong>
+                </p>
+
+                <div class="poster-footer">
+                    DIRECTOR'S CUT · CINE TIZA
+                </div>
+
+            </div>
+
+            <div class="result-info">
+
+                <p class="eyebrow">SE ESTRENA TU PELÍCULA</p>
+
+                <h2 id="resultTitle">
+                    OBRA MAESTRA
+                </h2>
+
+                <p id="resultDescription"></p>
+
+                <div class="final-stats">
+
+                    <div>
+                        <span>Dirección</span>
+                        <strong id="finalDirection"></strong>
+                    </div>
+
+                    <div>
+                        <span>Actuación</span>
+                        <strong id="finalActing"></strong>
+                    </div>
+
+                    <div>
+                        <span>Fotografía</span>
+                        <strong id="finalCinematography"></strong>
+                    </div>
+
+                    <div>
+                        <span>Sonido</span>
+                        <strong id="finalSound"></strong>
+                    </div>
+
+                    <div>
+                        <span>Historia</span>
+                        <strong id="finalStory"></strong>
+                    </div>
+
+                    <div>
+                        <span>Creatividad</span>
+                        <strong id="finalCreativity"></strong>
+                    </div>
+
+                </div>
+
+                <button id="restartBtn" class="primary-btn">
+                    🎬 HACER OTRA PELÍCULA
+                </button>
+
+                <button id="shareBtn" class="secondary-btn">
+                    📤 COMPARTIR RESULTADO
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- MODAL -->
+    <div id="howModal" class="modal">
+
+        <div class="modal-content">
+
+            <button id="closeModal" class="close">
+                ×
+            </button>
+
+            <h2>¿CÓMO SE JUEGA?</h2>
+
+            <p>
+                Sos el director de una película.
+            </p>
+
+            <p>
+                Vas a elegir un género, crear tu película
+                y tomar decisiones durante el rodaje.
+            </p>
+
+            <p>
+                Tus decisiones modificarán la dirección,
+                actuación, fotografía, sonido, historia
+                y creatividad.
+            </p>
+
+            <p>
+                Al terminar descubrirás qué tan buena
+                fue tu película.
+            </p>
+
+            <strong>
+                🎬 ¿Estás listo para dirigir?
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <script src="game.js"></script>
+
+</body>
+
+</html>

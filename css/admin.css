@@ -1,0 +1,376 @@
+/* ==========================================================================
+   CINE TIZA - PANEL DE ADMINISTRACIÓN (CMS) ESTILOS
+   ========================================================================== */
+
+.admin-body {
+  background-color: #0E0E12;
+  color: #E2E2E8;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ================= Sidebar de Administración ================= */
+
+.admin-sidebar {
+  width: 260px;
+  background-color: #14141A;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  transition: transform var(--transition-smooth);
+}
+
+.admin-sidebar-header {
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-logo {
+  width: 36px;
+  height: 36px;
+}
+
+.admin-brand-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #FFF;
+}
+
+.admin-badge-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(255, 212, 71, 0.15);
+  color: var(--color-yellow);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  margin-left: auto;
+  font-weight: 700;
+}
+
+.admin-nav {
+  padding: 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  color: #9898A6;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.admin-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #FFF;
+}
+
+.admin-nav-item.active {
+  background-color: var(--color-yellow);
+  color: #0E0E12;
+  font-weight: 700;
+}
+
+.admin-nav-item.active .admin-nav-icon {
+  color: #0E0E12;
+}
+
+.admin-nav-icon {
+  font-size: 1.15rem;
+  width: 20px;
+  text-align: center;
+}
+
+.admin-sidebar-footer {
+  padding: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-user-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #FFF;
+}
+
+.admin-user-email {
+  font-size: 0.7rem;
+  color: #6C6C7A;
+}
+
+/* ================= Contenido Principal del CMS ================= */
+
+.admin-main {
+  margin-left: 260px;
+  flex-grow: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #0E0E12;
+}
+
+.admin-topbar {
+  height: 70px;
+  background-color: #14141A;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+.admin-page-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFF;
+}
+
+.admin-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-content-area {
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* ================= Tarjetas de Métricas (Dashboard) ================= */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background-color: #181822;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #8C8C9E;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #FFF;
+  line-height: 1;
+}
+
+.metric-sub {
+  font-size: 0.8rem;
+  color: #6C6C7A;
+  margin-top: 0.5rem;
+}
+
+/* ================= Tablas de Datos CMS ================= */
+
+.admin-card {
+  background-color: #181822;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.admin-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.admin-table th {
+  background-color: #14141C;
+  color: #8C8C9E;
+  font-weight: 700;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.admin-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #D2D2DC;
+}
+
+.admin-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Badges de Estado */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+}
+
+.badge-pending { background: rgba(255, 183, 3, 0.15); color: #FFB703; border: 1px solid rgba(255, 183, 3, 0.3); }
+.badge-review { background: rgba(58, 134, 255, 0.15); color: #3A86FF; border: 1px solid rgba(58, 134, 255, 0.3); }
+.badge-approved { background: rgba(56, 176, 0, 0.15); color: #38B000; border: 1px solid rgba(56, 176, 0, 0.3); }
+.badge-finalist { background: rgba(255, 212, 71, 0.2); color: var(--color-yellow); border: 1px solid var(--color-yellow); }
+.badge-rejected { background: rgba(217, 54, 54, 0.15); color: #D93636; border: 1px solid rgba(217, 54, 54, 0.3); }
+
+/* Acciones de Tabla */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-action {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-action:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-action.delete:hover {
+  background: var(--color-red);
+  border-color: var(--color-red);
+}
+
+/* Modales Administrativos */
+.admin-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.admin-modal.active {
+  display: flex;
+}
+
+.admin-modal-content {
+  background: #181822;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 680px;
+  box-shadow: var(--shadow-lg);
+  margin: auto;
+}
+
+.admin-modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-modal-body {
+  padding: 1.5rem;
+}
+
+.admin-modal-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+  }
+  .admin-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  .admin-main {
+    margin-left: 0;
+  }
+}
