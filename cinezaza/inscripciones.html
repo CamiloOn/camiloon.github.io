@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscribí tu Corto — Cine Tiza 18ª Edición (2026)</title>
+  <meta name="description"
+    content="Formulario oficial de inscripción de cortometrajes para escuelas secundarias en la 18ª edición del Festival Cine Tiza.">
+  <link rel="shortcut icon" href="images/Logo_CineTiza.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="cinema-navbar" id="mainHeader">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <img src="images/Logo_CineTiza.png" alt="Logo Cine Tiza" class="navbar-logo">
+        <div class="navbar-brand-text">
+          <span class="brand-title">CINE TIZA</span>
+          <span class="brand-subtitle">INSCRIPCIONES 2026</span>
+        </div>
+      </a>
+
+      <nav class="navbar-links">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="cortos.html" class="nav-link">Cortometrajes</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+        <a href="ediciones.html" class="nav-link">Ediciones</a>
+        <a href="bases.html" class="nav-link">Bases</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="navbar-cta">
+        <a href="inscripciones.html" class="btn btn-primary btn-sm">Inscribí tu Corto</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Inicio</a>
+    <a href="cortos.html" class="nav-link">Cortometrajes</a>
+    <a href="agenda.html" class="nav-link">Agenda</a>
+    <a href="ediciones.html" class="nav-link">Ediciones</a>
+    <a href="bases.html" class="nav-link">Bases</a>
+    <a href="contacto.html" class="nav-link">Contacto</a>
+    <a href="inscripciones.html" class="btn btn-primary" style="margin-top: 1rem;">Inscribí tu Corto</a>
+  </div>
+
+  <!-- Header -->
+  <section class="section"
+    style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 2rem; background: #08080A; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <span class="scene-tag red">CONVOCATORIA OFICIAL 2026</span>
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem); margin: 0.5rem 0 1rem;">INSCRIBÍ TU <span
+          class="highlight text-yellow">CORTOMETRAJE</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 760px;">
+        Completá los datos del cortometraje y de la institución educativa para postular tu producción a la 18ª edición
+        del Festival Cine Tiza en Oncativo, Córdoba.
+      </p>
+    </div>
+  </section>
+
+  <!-- Formulario -->
+  <section class="section">
+    <div class="container" style="max-width: 960px;">
+
+      <div class="form-card">
+        <form id="submissionForm">
+
+          <!-- Honeypot anti-spam -->
+          <input type="text" id="subHp" name="website_hp" style="display:none !important;" tabindex="-1"
+            autocomplete="off">
+
+          <!-- 1. Datos de la Obra -->
+          <div style="margin-bottom: 2.5rem;">
+            <h3
+              style="font-size: 1.4rem; color: var(--color-yellow); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>🎬</span> 1. Información de la Producción Audiovisual
+            </h3>
+
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="subTitle" class="form-label">Nombre del Cortometraje <span class="required">*</span></label>
+                <input type="text" id="subTitle" class="form-control" placeholder="Ej. Turno Noche" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subCategory" class="form-label">Modalidad / Categoría <span
+                    class="required">*</span></label>
+                <select id="subCategory" class="form-control" required>
+                  <option value="FICCION">Certamen Oficial - Ficción</option>
+                  <option value="DOCUMENTAL">Certamen Oficial - Documental</option>
+                  <option value="ANIMACION">Certamen Oficial - Animación</option>
+                  <option value="VIDEOCLIP">Certamen Oficial - Videoclip</option>
+                  <option value="INTERNACIONAL">Certamen Oficial - Internacional</option>
+                  <option value="MUESTRA_FEDERAL">Muestra Federal (No Competitiva)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="subGenre" class="form-label">Género / Temática <span class="required">*</span></label>
+                <input type="text" id="subGenre" class="form-control" placeholder="Ej. Drama, Suspenso, Comedia, Social"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="subDuration" class="form-label">Duración Estimada <span class="required">*</span></label>
+                <input type="text" id="subDuration" class="form-control" placeholder="Ej. 11:30" required>
+                <span class="form-helper">Formato MM:SS (máx. según bases)</span>
+              </div>
+
+              <div class="form-group">
+                <label for="subVideoUrl" class="form-label">Enlace al Video (YouTube / Vimeo / Drive) <span
+                    class="required">*</span></label>
+                <input type="url" id="subVideoUrl" class="form-control"
+                  placeholder="https://www.youtube.com/watch?v=..." required>
+                <span class="form-helper">Asegurarse de que los permisos de visualización sean públicos o con
+                  enlace.</span>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="subSynopsis" class="form-label">Sinopsis Argumental <span class="required">*</span></label>
+                <textarea id="subSynopsis" class="form-control"
+                  placeholder="Resumen breve del argumento o tema del cortometraje (máx. 800 caracteres)..."
+                  required></textarea>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="subThumbnail" class="form-label">Afiche o Fotograma Destacado (Opcional)</label>
+                <input type="file" id="subThumbnail" class="form-control" accept="image/*">
+                <span class="form-helper">Formatos permitidos: JPG, PNG, WEBP (máx. 8MB).</span>
+                <img id="thumbnailPreview" alt="Vista previa del afiche"
+                  style="display: none; max-width: 240px; margin-top: 1rem; border-radius: 6px; border: 1px solid var(--border-card);">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Datos de la Institución y Realizadores -->
+          <div style="margin-bottom: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
+            <h3
+              style="font-size: 1.4rem; color: var(--color-yellow); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>🏫</span> 2. Institución y Equipo Responsable
+            </h3>
+
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="subInstitution" class="form-label">Nombre de la Escuela / Institución <span
+                    class="required">*</span></label>
+                <input type="text" id="subInstitution" class="form-control"
+                  placeholder="Ej. Instituto Secundario Oncativo (ISO)" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subCity" class="form-label">Localidad / Ciudad <span class="required">*</span></label>
+                <input type="text" id="subCity" class="form-control" placeholder="Ej. Oncativo" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subProvince" class="form-label">Provincia / Estado <span class="required">*</span></label>
+                <input type="text" id="subProvince" class="form-control" placeholder="Ej. Córdoba" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subCountry" class="form-label">País <span class="required">*</span></label>
+                <input type="text" id="subCountry" class="form-control" value="Argentina" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subDirector" class="form-label">Director/a (Estudiante) <span
+                    class="required">*</span></label>
+                <input type="text" id="subDirector" class="form-control" placeholder="Nombre del alumno/a director/a"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="subTeacher" class="form-label">Docente / Tutor Responsable <span
+                    class="required">*</span></label>
+                <input type="text" id="subTeacher" class="form-control" placeholder="Profesor/a a cargo del proyecto"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="subEmail" class="form-label">Correo Electrónico de Contacto <span
+                    class="required">*</span></label>
+                <input type="email" id="subEmail" class="form-control" placeholder="email@escuela.edu.ar" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subPhone" class="form-label">Teléfono / WhatsApp de Contacto <span
+                    class="required">*</span></label>
+                <input type="tel" id="subPhone" class="form-control" placeholder="+54 9 3572 ..." required>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="subParticipants" class="form-label">Integrantes del Equipo Estudiantil (Créditos)</label>
+                <input type="text" id="subParticipants" class="form-control"
+                  placeholder="Ej. Juan Pérez (Sonido), María Gómez (Cámara), Lucas Díaz (Montaje)">
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Declaración y Envío -->
+          <div style="padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+            <label class="form-checkbox" style="margin-bottom: 2rem;">
+              <input type="checkbox" id="subTerms" required>
+              <span>
+                Declaro que la obra presentada es de autoría estudiantil, cuenta con la supervisión pedagógica de la
+                institución indicada y acepto íntegramente las <a href="bases.html" target="_blank"
+                  style="color: var(--color-yellow); text-decoration: underline;">Bases y Condiciones Oficiales de Cine
+                  Tiza 2026</a>.
+              </span>
+            </label>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary btn-lg w-100" style="padding: 1.25rem;">
+              Enviar Inscripción de Cortometraje →
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cinema-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 Cine Tiza — Instituto Secundario Oncativo (ISO). Todos los derechos reservados.</div>
+        <div>📍 Consultas: festivalcinetiza@gmail.com</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/inscripciones.js"></script>
+</body>
+
+</html>

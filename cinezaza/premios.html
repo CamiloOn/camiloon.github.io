@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premios & Distinciones — Cine Tiza | Palmarés Oficial</title>
+  <meta name="description"
+    content="Palmarés histórico de ganadores del Festival Internacional de Cine y Artes Estudiantiles Cine Tiza.">
+  <link rel="shortcut icon" href="images/Logo_CineTiza.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="cinema-navbar" id="mainHeader">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <img src="images/Logo_CineTiza.png" alt="Logo Cine Tiza" class="navbar-logo">
+        <div class="navbar-brand-text">
+          <span class="brand-title">CINE TIZA</span>
+          <span class="brand-subtitle">PREMIACIONES</span>
+        </div>
+      </a>
+
+      <nav class="navbar-links">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="cortos.html" class="nav-link">Cortometrajes</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+        <a href="ediciones.html" class="nav-link">Ediciones</a>
+        <a href="bases.html" class="nav-link">Bases</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="navbar-cta">
+        <a href="inscripciones.html" class="btn btn-primary btn-sm">Inscribí tu Corto</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Inicio</a>
+    <a href="cortos.html" class="nav-link">Cortometrajes</a>
+    <a href="agenda.html" class="nav-link">Agenda</a>
+    <a href="ediciones.html" class="nav-link">Ediciones</a>
+    <a href="bases.html" class="nav-link">Bases</a>
+    <a href="contacto.html" class="nav-link">Contacto</a>
+    <a href="inscripciones.html" class="btn btn-primary" style="margin-top: 1rem;">Inscribí tu Corto</a>
+  </div>
+
+  <!-- Header -->
+  <section class="section"
+    style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 2rem; background: #08080A; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <span class="scene-tag">PALMARÉS & RECONOCIMIENTOS</span>
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem); margin: 0.5rem 0 1rem;">Y EL PREMIO ES <span
+          class="highlight text-yellow">PARA...</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 720px;">
+        Historial de producciones galardonadas con la estatuilla oficial Tiza de Oro y menciones especiales otorgadas
+        por el Jurado Oficial y el público.
+      </p>
+    </div>
+  </section>
+
+  <!-- Lista de Premios -->
+  <section class="section">
+    <div class="container" style="max-width: 960px;">
+      <div class="timeline-list" id="awardsListGrid">
+        <!-- Renderizado dinámicamente -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cinema-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 Cine Tiza — Instituto Secundario Oncativo (ISO). Todos los derechos reservados.</div>
+        <div>📍 Oncativo · Córdoba · Argentina</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const awards = await CineTizaAPI.getAwards();
+      const container = document.getElementById('awardsListGrid');
+      if (!container) return;
+
+      container.innerHTML = awards.map(aw => `
+        <div class="timeline-item reveal-fade-up visible">
+          <div style="text-align: center;">
+            <div style="font-size: 2.2rem; margin-bottom: 0.25rem;">🏆</div>
+            <div style="font-family: var(--font-mono); font-weight: 700; color: var(--color-yellow); font-size: 1rem;">EDICIÓN ${aw.year}</div>
+          </div>
+          <div>
+            <span class="scene-tag" style="margin-bottom: 0.5rem;">${aw.category_name}</span>
+            <h3 class="event-title" style="font-size: 1.4rem; color: #FFF;">"${aw.winner_film_title}"</h3>
+            <p class="event-desc" style="color: var(--color-yellow); font-weight: 600;">🏫 ${aw.institution}</p>
+            <div class="event-location">🎬 Dirección: ${aw.director} ${aw.notes ? `· 📝 ${aw.notes}` : ''}</div>
+          </div>
+          <div>
+            <a href="cortos.html" class="btn btn-secondary btn-sm">Ver Corto ↗</a>
+          </div>
+        </div>
+      `).join('');
+    });
+  </script>
+</body>
+
+</html>

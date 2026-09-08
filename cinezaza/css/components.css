@@ -1,0 +1,1515 @@
+/* ==========================================================================
+   CINE TIZA - COMPONENTES CINEMATOGRÁFICOS
+   ========================================================================== */
+
+/* ================= 1. Navbar Principal ================= */
+
+.cinema-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-smooth);
+  /* Fondo base siempre visible — evita superposición visual con hero al estar en top=0 */
+  background: rgba(11, 11, 13, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cinema-navbar.scrolled {
+  background: rgba(49, 49, 54, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  height: 70px;
+}
+
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+}
+
+.navbar-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  transition: transform var(--transition-fast);
+}
+
+.navbar-brand:hover .navbar-logo {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.navbar-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.brand-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-yellow);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  position: relative;
+  padding: 0.4rem 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-yellow);
+  transition: width var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.navbar-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* ================= 2. Hero Cinematográfico ================= */
+
+.hero-cinema {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--header-height);
+  padding-bottom: 4rem;
+  overflow: hidden;
+  background-color: #050507;
+}
+
+.hero-bg-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.28;
+  filter: brightness(0.7) contrast(1.15);
+  transform: scale(1.05);
+  transition: transform 10s ease-out;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(11, 11, 13, 0.4) 0%, rgba(11, 11, 13, 0.95) 85%);
+  pointer-events: none;
+}
+
+/* HUD Overlay de Cámara */
+.camera-hud {
+  position: absolute;
+  top: calc(var(--header-height) + 1rem);
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  z-index: 10;
+}
+
+.hud-top,
+.hud-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.hud-rec {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--color-red);
+}
+
+.rec-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-red);
+  border-radius: 50%;
+  animation: recPulse 1.2s infinite ease-in-out;
+  box-shadow: 0 0 10px var(--color-red);
+}
+
+.hud-brackets {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(85vw, 600px);
+  height: min(50vh, 320px);
+  border: 1px solid rgba(255, 212, 71, 0.15);
+  pointer-events: none;
+}
+
+.hud-brackets::before,
+.hud-brackets::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--color-yellow);
+  border-style: solid;
+}
+
+.hud-brackets::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.hud-brackets::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-badge-edition {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 212, 71, 0.12);
+  border: 1px solid rgba(255, 212, 71, 0.35);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-yellow);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0 20px rgba(255, 212, 71, 0.15);
+}
+
+.hero-title {
+  font-size: clamp(3.2rem, 9vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.03em;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.hero-title .tiza {
+  color: var(--color-yellow);
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 35px rgba(255, 212, 71, 0.4);
+}
+
+.hero-lead {
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-dates-venue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-dates-venue span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+/* ================= 3. Countdown Timer ================= */
+
+.countdown-wrapper {
+  background: rgba(19, 19, 23, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  min-width: 60px;
+  text-align: center;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.countdown-unit {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 0.35rem;
+  letter-spacing: 0.05em;
+}
+
+.countdown-sep {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--color-yellow);
+  font-weight: 900;
+  margin-top: -1.2rem;
+}
+
+/* ================= 4. Estadísticas Animadas ================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2.2rem 1.75rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-yellow), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 212, 71, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 212, 71, 0.1);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--color-yellow);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+}
+
+.stat-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ================= 5. Sección "No Solo Hacemos Cine" ================= */
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.pillar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  transition: all var(--transition-smooth);
+  overflow: hidden;
+}
+
+.pillar-icon-box {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.85rem;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.pillar-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 212, 71, 0.4);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md), 0 0 30px rgba(255, 212, 71, 0.08);
+}
+
+.pillar-card:hover .pillar-icon-box {
+  transform: scale(1.12) rotate(-4deg);
+  background: var(--color-yellow-subtle);
+  border-color: var(--color-yellow);
+}
+
+.pillar-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pillar-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* ================= 6. Tarjetas de Cortometrajes (FilmCard) ================= */
+
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2rem;
+}
+
+.film-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-smooth);
+  position: relative;
+  cursor: pointer;
+}
+
+.film-thumbnail-wrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background-color: #08080A;
+  overflow: hidden;
+}
+
+.film-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.film-card:hover .film-thumbnail {
+  transform: scale(1.08);
+}
+
+.film-play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 11, 13, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.play-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  color: var(--text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(255, 212, 71, 0.6);
+  transform: scale(0.85);
+  transition: transform var(--transition-fast);
+}
+
+.film-card:hover .film-play-overlay {
+  opacity: 1;
+}
+
+.film-card:hover .play-circle {
+  transform: scale(1);
+}
+
+.film-badge-category {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(11, 11, 13, 0.85);
+  backdrop-filter: blur(8px);
+  color: var(--color-yellow);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 212, 71, 0.3);
+  text-transform: uppercase;
+}
+
+.film-duration {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: #FFF;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.film-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.film-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.film-institution {
+  font-size: 0.85rem;
+  color: var(--color-yellow);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.film-location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.film-awards-preview {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.award-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(255, 212, 71, 0.1);
+  color: var(--color-yellow);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 212, 71, 0.2);
+}
+
+.film-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 212, 71, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+}
+
+/* ================= 7. Filtros Dinámicos ================= */
+
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.filter-btn:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.filter-btn.active {
+  background: var(--color-yellow);
+  color: var(--text-inverse);
+  border-color: var(--color-yellow);
+  box-shadow: 0 0 15px rgba(255, 212, 71, 0.35);
+}
+
+.search-input-wrapper {
+  position: relative;
+  min-width: 260px;
+  flex-grow: 1;
+  max-width: 400px;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  padding: 0.55rem 1.15rem 0.55rem 2.5rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: border-color var(--transition-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-yellow);
+  box-shadow: 0 0 15px rgba(255, 212, 71, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+/* ================= 8. Agenda y Timeline ================= */
+
+.agenda-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.agenda-tab-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.75rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all var(--transition-fast);
+}
+
+.agenda-tab-btn .tab-day {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.agenda-tab-btn .tab-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.agenda-tab-btn:hover {
+  border-color: var(--color-yellow);
+}
+
+.agenda-tab-btn.active {
+  background: var(--color-yellow);
+  border-color: var(--color-yellow);
+  box-shadow: var(--shadow-glow);
+}
+
+.agenda-tab-btn.active .tab-day {
+  color: var(--text-inverse);
+}
+
+.agenda-tab-btn.active .tab-date {
+  color: rgba(11, 11, 13, 0.75);
+}
+
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.timeline-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.75rem;
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  transition: all var(--transition-fast);
+}
+
+.timeline-item:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 212, 71, 0.4);
+  transform: translateX(6px);
+}
+
+.event-time {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-yellow);
+}
+
+.event-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.event-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.event-location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.event-badge-type {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.type-proyeccion {
+  background: rgba(58, 134, 255, 0.15);
+  border-color: rgba(58, 134, 255, 0.35);
+  color: #70A7FF;
+}
+
+.type-taller {
+  background: rgba(255, 212, 71, 0.15);
+  border-color: rgba(255, 212, 71, 0.35);
+  color: var(--color-yellow);
+}
+
+.type-charla {
+  background: rgba(157, 78, 221, 0.15);
+  border-color: rgba(157, 78, 221, 0.35);
+  color: #C77DFF;
+}
+
+.type-premiacion {
+  background: rgba(217, 54, 54, 0.15);
+  border-color: rgba(217, 54, 54, 0.35);
+  color: #FF7070;
+}
+
+.type-musica {
+  background: rgba(56, 176, 0, 0.15);
+  border-color: rgba(56, 176, 0, 0.35);
+  color: #70E000;
+}
+
+/* ================= 9. Archivo de Ediciones ================= */
+
+.editions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.edition-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.edition-poster-wrapper {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #000;
+}
+
+.edition-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.edition-card:hover .edition-poster {
+  transform: scale(1.06);
+}
+
+.edition-number-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--color-yellow);
+  color: var(--text-inverse);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.edition-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.edition-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.edition-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.edition-stats-mini {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.edition-stats-mini strong {
+  color: var(--text-primary);
+}
+
+.edition-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-yellow);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ================= 10. Galería y Lightbox ================= */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(11, 11, 13, 0.9) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.08);
+}
+
+.gallery-caption {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.gallery-cat {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-yellow);
+  text-transform: uppercase;
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 5, 7, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightbox-modal.active {
+  display: flex;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 85vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-card);
+}
+
+.lightbox-caption {
+  margin-top: 1rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+
+.lightbox-close:hover {
+  background: var(--color-red);
+}
+
+/* ================= 11. Modal de Cortometraje (Video Player) ================= */
+
+.film-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 5, 7, 0.92);
+  backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.film-modal.active {
+  display: flex;
+}
+
+.film-modal-dialog {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 960px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  margin: auto;
+}
+
+.film-modal-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.film-modal-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.film-modal-body {
+  padding: 2rem;
+}
+
+.film-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.film-modal-details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.film-synopsis-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-yellow);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.film-credits-box {
+  background: var(--bg-card);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+}
+
+.film-credits-box div {
+  margin-bottom: 0.5rem;
+}
+
+.film-credits-box strong {
+  color: var(--text-primary);
+}
+
+/* ================= 12. Formulario de Inscripción ================= */
+
+.form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  box-shadow: var(--shadow-md);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-label .required {
+  color: var(--color-red);
+}
+
+.form-control {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-yellow);
+  box-shadow: 0 0 15px rgba(255, 212, 71, 0.2);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-helper {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.form-checkbox input {
+  margin-top: 0.3rem;
+  accent-color: var(--color-yellow);
+  width: 18px;
+  height: 18px;
+}
+
+/* ================= 13. Footer Cinematográfico ================= */
+
+.cinema-footer {
+  background: #060608;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 4.5rem;
+  padding-bottom: 2.5rem;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.footer-col-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.05em;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--color-yellow);
+  transform: translateX(3px);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.social-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.social-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+.social-btn:hover {
+  background: var(--color-yellow);
+  color: var(--text-inverse);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(255, 212, 71, 0.3);
+}
+
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-institutions-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.inst-logo {
+  height: 38px;
+  width: auto;
+  opacity: 0.75;
+  filter: grayscale(1);
+  transition: all var(--transition-fast);
+}
+
+.inst-logo:hover {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+/* ================= 14. Cursor Cinematográfico Personalizado ================= */
+
+.cinema-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-yellow);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s, border-radius 0.2s, transform 0.05s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #000;
+  box-shadow: 0 0 10px rgba(255, 212, 71, 0.6);
+}
+
+.cinema-cursor.cursor-play {
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-yellow);
+  box-shadow: 0 0 25px rgba(255, 212, 71, 0.8);
+}
+
+.cinema-cursor.cursor-view {
+  width: 54px;
+  height: 54px;
+  background-color: #FFF;
+  color: #000;
+}
+
+.cinema-cursor.cursor-open {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-red);
+  color: #FFF;
+}
+
+@media (pointer: coarse),
+(hover: none) {
+  .cinema-cursor {
+    display: none !important;
+  }
+}
+
+/* ================= Responsive Breakpoints ================= */
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .film-modal-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .navbar-links,
+  .navbar-cta .btn {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background: rgba(11, 11, 13, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border-card);
+    z-index: 999;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hud-brackets {
+    display: none;
+  }
+}

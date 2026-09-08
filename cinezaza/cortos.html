@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortometrajes — Cine Tiza | Festival Internacional de Cine Estudiantil</title>
+  <meta name="description"
+    content="Catálogo completo de cortometrajes participantes en el Festival Cine Tiza. Ficción, documental, animación, videoclips y producciones internacionales.">
+  <link rel="shortcut icon" href="images/Logo_CineTiza.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="cinema-navbar" id="mainHeader">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <img src="images/Logo_CineTiza.png" alt="Logo Cine Tiza" class="navbar-logo">
+        <div class="navbar-brand-text">
+          <span class="brand-title">CINE TIZA</span>
+          <span class="brand-subtitle">CORTOMETRAJES</span>
+        </div>
+      </a>
+
+      <nav class="navbar-links">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="cortos.html" class="nav-link active">Cortometrajes</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+        <a href="ediciones.html" class="nav-link">Ediciones</a>
+        <a href="bases.html" class="nav-link">Bases</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+        <a href="fafa.html" class="nav-link">Juego</a>
+      </nav>
+
+      <div class="navbar-cta">
+        <a href="inscripciones.html" class="btn btn-primary btn-sm">Inscribí tu Corto</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Inicio</a>
+    <a href="cortos.html" class="nav-link active">Cortometrajes</a>
+    <a href="agenda.html" class="nav-link">Agenda</a>
+    <a href="ediciones.html" class="nav-link">Ediciones</a>
+    <a href="bases.html" class="nav-link">Bases</a>
+    <a href="contacto.html" class="nav-link">Contacto</a>
+    <a href="inscripciones.html" class="btn btn-primary" style="margin-top: 1rem;">Inscribí tu Corto</a>
+  </div>
+
+  <!-- Header de Página -->
+  <section class="section"
+    style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 2rem; background: #08080A; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <span class="scene-tag">SELECCIÓN AUDIOVISUAL</span>
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem); margin: 0.5rem 0 1rem;">CATÁLOGO DE <span
+          class="highlight text-yellow">CORTOMETRAJES</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 720px;">
+        Explorá las historias, miradas e investigaciones realizadas por estudiantes de escuelas secundarias en todas las
+        categorías del festival.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sección de Filtros y Catálogo -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Barra de Filtros -->
+      <div class="filters-bar" style="justify-content: space-between;">
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+          <button class="filter-btn active" data-category="">Todos</button>
+          <button class="filter-btn" data-category="FICCION">Ficción</button>
+          <button class="filter-btn" data-category="DOCUMENTAL">Documental</button>
+          <button class="filter-btn" data-category="ANIMACION">Animación</button>
+          <button class="filter-btn" data-category="VIDEOCLIP">Videoclip</button>
+          <button class="filter-btn" data-category="INTERNACIONAL">Internacional</button>
+          <button class="filter-btn" data-category="MUESTRA_FEDERAL">Muestra Federal</button>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchFilmInput" class="search-input"
+              placeholder="Buscar por título, escuela o director...">
+          </div>
+
+          <select id="yearFilterSelect" class="form-control"
+            style="width: auto; padding: 0.55rem 1rem; border-radius: var(--radius-pill); font-size: 0.85rem;">
+            <option value="">Todos los Años</option>
+            <option value="2026">2026 (18ª Edición)</option>
+            <option value="2025">2025 (17ª Edición)</option>
+            <option value="2024">2024 (16ª Edición)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Contador de Resultados -->
+      <div id="filmsCountLabel"
+        style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem;">
+        Cargando cortometrajes...
+      </div>
+
+      <!-- Grid de Cortos -->
+      <div class="film-grid" id="catalogFilmsGrid">
+        <!-- Renderizado dinámicamente vía cortos.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cinema-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 Cine Tiza — Instituto Secundario Oncativo (ISO). Todos los derechos reservados.</div>
+        <div>📍 Oncativo · Córdoba · Argentina</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cortos.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archivo Histórico de Ediciones — Cine Tiza (2009 — 2026)</title>
+  <meta name="description"
+    content="18 años de historia del Festival Cine Tiza. Consultá la memoria audiovisual, afiches, ganadores y estadísticas de cada edición desde 2009.">
+  <link rel="shortcut icon" href="images/Logo_CineTiza.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="cinema-navbar" id="mainHeader">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <img src="images/Logo_CineTiza.png" alt="Logo Cine Tiza" class="navbar-logo">
+        <div class="navbar-brand-text">
+          <span class="brand-title">CINE TIZA</span>
+          <span class="brand-subtitle">EDICIONES</span>
+        </div>
+      </a>
+
+      <nav class="navbar-links">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="cortos.html" class="nav-link">Cortometrajes</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+        <a href="ediciones.html" class="nav-link active">Ediciones</a>
+        <a href="bases.html" class="nav-link">Bases</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+        <a href="fafa.html" class="nav-link">Juego</a>
+      </nav>
+
+      <div class="navbar-cta">
+        <a href="inscripciones.html" class="btn btn-primary btn-sm">Inscribí tu Corto</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Inicio</a>
+    <a href="cortos.html" class="nav-link">Cortometrajes</a>
+    <a href="agenda.html" class="nav-link">Agenda</a>
+    <a href="ediciones.html" class="nav-link active">Ediciones</a>
+    <a href="bases.html" class="nav-link">Bases</a>
+    <a href="contacto.html" class="nav-link">Contacto</a>
+    <a href="inscripciones.html" class="btn btn-primary" style="margin-top: 1rem;">Inscribí tu Corto</a>
+  </div>
+
+  <!-- Header -->
+  <section class="section"
+    style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 2rem; background: #08080A; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <span class="scene-tag">MEMORIA AUDIOVISUAL</span>
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem); margin: 0.5rem 0 1rem;">18 AÑOS DE <span
+          class="highlight text-yellow">HISTORIAS</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 720px;">
+        Desde su nacimiento en 2009 en las aulas del Instituto Secundario Oncativo hasta consolidarse como un festival
+        de proyección internacional.
+      </p>
+    </div>
+  </section>
+
+  <!-- Grid de Ediciones -->
+  <section class="section">
+    <div class="container">
+      <div class="editions-grid" id="editionsListGrid">
+        <!-- Renderizado dinámicamente -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cinema-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 Cine Tiza — Instituto Secundario Oncativo (ISO). Todos los derechos reservados.</div>
+        <div>📍 Oncativo · Córdoba · Argentina</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const editions = await CineTizaAPI.getEditions();
+      const container = document.getElementById('editionsListGrid');
+      if (!container) return;
+
+      container.innerHTML = editions.map(ed => `
+        <article class="edition-card reveal-fade-up visible">
+          <div class="edition-poster-wrapper">
+            <img src="${ed.poster_url || 'images/Logo_CineTiza.png'}" alt="Afiche de ${ed.title}" class="edition-poster" loading="lazy">
+            <div class="edition-number-tag">${ed.number}ª EDICIÓN</div>
+          </div>
+          <div class="edition-body">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-yellow); margin-bottom: 0.25rem;">AÑO ${ed.year}</span>
+            <h3 class="edition-title">${ed.title}</h3>
+            ${ed.theme ? `<div style="font-style: italic; color: #FFF; font-size: 0.9rem; margin-bottom: 0.75rem;">"${ed.theme}"</div>` : ''}
+            <p class="edition-desc">${ed.description}</p>
+            <div class="edition-stats-mini">
+              <span>🎬 <strong>${ed.films_count || 0}</strong> Cortos</span>
+              <span>🏫 <strong>${ed.schools_count || 0}</strong> Escuelas</span>
+              <span>👥 <strong>${ed.attendees_count || 0}+</strong> Asistentes</span>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    });
+  </script>
+</body>
+
+</html>
